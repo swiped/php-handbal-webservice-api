@@ -38,7 +38,7 @@ class Api
 	 * @param StoreInterface $cache
 	 * @param HttpClientInterface $client
 	 */
-	public function __construct($code, StoreInterface $cache, HttpClientInterface $client = null)
+	public function __construct($code, StoreInterface $cache = null, HttpClientInterface $client = null)
 	{
 		$this->code = $code;
 		$this->cache = $cache ?: new ArrayStore();
