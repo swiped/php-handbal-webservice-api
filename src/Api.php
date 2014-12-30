@@ -55,14 +55,13 @@ class Api
 	 */
 	public function request($parameters = [])
 	{
-		$defaults = array(
+		$parameters = array(
 			'file' => 'json',
 			'f' => 'get_data',
-			't_id' => '',
-			'p' => 0,
-			'full' => 0,
+			't_id' => isset($parameters['t_id']) ? (string) $parameters['t_id'] : '',
+			'p' => isset($parameters['p']) ? (int) $parameters['p'] : 0,
+			'full' => isset($param['full']) ? (int) $parameters['full'] : 0,
 		);
-		$parameters = array_merge($defaults, $parameters);
 
 		if( !($data = $this->getCached($parameters))) {
 			try {
