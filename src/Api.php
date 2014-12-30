@@ -58,6 +58,7 @@ class Api
 		$parameters = array(
 			'file' => 'json',
 			'f' => 'get_data',
+			't' => (string) $parameters['t'],
 			't_id' => isset($parameters['t_id']) ? (string) $parameters['t_id'] : '',
 			'p' => isset($parameters['p']) ? (int) $parameters['p'] : 0,
 			'full' => isset($param['full']) ? (int) $parameters['full'] : 0,
