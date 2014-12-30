@@ -41,7 +41,9 @@ foreach($api->getTeams() as $team){
 }
 ```
 
-You can use the cache component from Laravel (illuminate/cache). By default, an ArrayCache is used, which only caches for the current request. If you want to use a FileCache for example, require `"illuminate/filesystem": "~4.0` and to the following:
+### Cache
+
+You can use the cache component from Laravel (illuminate/cache). By default, an ArrayCache is used, which only caches for the current request. If you want to use a FileCache for example, composer require `"illuminate/filesystem": "~4.0` and do the following:
 
 ```php
 $filesystem = new \Illuminate\Filesystem\Filesystem;
@@ -51,4 +53,4 @@ $cacheStore = new \Illuminate\Cache\FileStore($filesystem, __DIR__.'/cache');
 $api = new Api($code, $cacheStore);
 ```
 
-When using Laravel, you can use `Cache::getStore()` to the Cache store.
+When using Laravel, you can use `Cache::getStore()` to get the Cache store.
