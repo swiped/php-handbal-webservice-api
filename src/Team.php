@@ -97,14 +97,14 @@ class Team extends AbstractItem
     }
 
     /**
-     * @param  int  Page
      * @param  boolean Full response
+     * @param  int  Page
      * @return Match[]
      * @throws InvalidResponseException
      */
-    public function getResults($page = 0, $full = false)
+    public function getResults($full = false, $page = 0)
     {
-        return $this->api->getResults($page, $full, $this->getId());
+        return $this->api->getResults($full, $page, $this->getId());
     }
 
     /**

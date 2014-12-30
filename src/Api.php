@@ -49,19 +49,24 @@ class Api
 	/**
 	 * Make a request to the API
 	 *
-	 * @param array $param
+	 * @param string $type
+	 * @param string|array $teamId
+	 * @param boolean Full result
+	 * @param int $page
 	 * @throws InvalidResponseException
 	 * @return array
 	 */
-	public function request($param = [])
+	public function request($type, $teamId = '', $full = false, $page = 0)
 	{
+		$teamId = is_array($teamId) ? implode(',', $teamId) : $teamId;
+
 		$parameters = array(
 			'file' => 'json',
 			'f' => 'get_data',
-			't' => (string) $param['t'],
-			't_id' => isset($param['t_id']) ? (string) $param['t_id'] : '',
-			'p' => isset($param['p']) ? (int) $param['p'] : 0,
-			'full' => isset($param['full']) ? (int) $param['full'] : 0,
+			't' => (string) $type,
+			't_id' => (string) $teamId,
+			'p' => (int) $page,
+			'full' => $full ? 1 : 0,
 		);
 
 		$data = $this->getCached($parameters);
@@ -141,10 +146,7 @@ class Api
 			return $this->teams;
 		}
 
-		$params = [
-			't' => 'teams',
-		];
-		$response = $this->request($params);
+		$response = $this->request('teams');
 
 		foreach($response as $category => $data) {
 			foreach($data['v'] as $item) {
@@ -185,12 +187,7 @@ class Api
 	public function getProgram($full = false, $teamId = '')
 	{
 		$program = [];
-		$params = [
-			't' => 'program',
-			't_id' => $teamId,
-			'full' => $full ? 1 : 0,
-		];
-		$response = $this->request($params);
+		$response = $this->request('program', $teamId, $full);
 
 		foreach($response as $week => $data) {
 			foreach($data['items'] as $item) {
@@ -204,22 +201,16 @@ class Api
 	}
 
 	/**
-	 * @param  int 	Page
 	 * @param  boolean Full response
+	 * @param  int 	Page
 	 * @param  string Team ids
 	 * @return Match[]
 	 * @throws InvalidResponseException
 	 */
-	public function getResults($page = 0, $full = false, $teamId = '')
+	public function getResults($full = false, $page = 0, $teamId = '')
 	{
 		$program = [];
-		$params = [
-			't' => 'result',
-			't_id' => $teamId,
-			'p' => $page,
-			'full' => $full ? 1 : 0,
-		];
-		$response = $this->request($params);
+		$response = $this->request('result', $teamId, $full, $page);
 
 		foreach($response as $week => $data) {
 			foreach($data['items'] as $item) {
@@ -240,11 +231,7 @@ class Api
 	public function getStandings($teamId = '')
 	{
 		$standings = [];
-		$params = [
-			't' => 'standing',
-			't_id' => $teamId,
-		];
-		$response = $this->request($params);
+		$response = $this->request('standing', $teamId);
 
 		foreach($response as $item) {
 			/** @var Standing $standing */
