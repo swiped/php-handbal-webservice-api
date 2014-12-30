@@ -49,19 +49,19 @@ class Api
 	/**
 	 * Make a request to the API
 	 *
-	 * @param array $parameters
+	 * @param array $param
 	 * @throws InvalidResponseException
 	 * @return array
 	 */
-	public function request($parameters = [])
+	public function request($param = [])
 	{
 		$parameters = array(
 			'file' => 'json',
 			'f' => 'get_data',
-			't' => (string) $parameters['t'],
-			't_id' => isset($parameters['t_id']) ? (string) $parameters['t_id'] : '',
-			'p' => isset($parameters['p']) ? (int) $parameters['p'] : 0,
-			'full' => isset($param['full']) ? (int) $parameters['full'] : 0,
+			't' => (string) $param['t'],
+			't_id' => isset($param['t_id']) ? (string) $param['t_id'] : '',
+			'p' => isset($param['p']) ? (int) $param['p'] : 0,
+			'full' => isset($param['full']) ? (int) $param['full'] : 0,
 		);
 
 		$data = $this->getCached($parameters);
