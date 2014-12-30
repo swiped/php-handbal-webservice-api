@@ -63,9 +63,10 @@ class Api
 			'full' => isset($param['full']) ? (int) $parameters['full'] : 0,
 		);
 
-		if( !($data = $this->getCached($parameters))) {
+		$data = $this->getCached($parameters);
+		if($data === null) {
 			try {
-				$data = $this->client->post($parameters);
+				$data = $this->client->post($parameters) ?: [];
 			}catch(ParseException $e){
 				throw new InvalidResponseException("Cannot parse message: ".$e->getResponse()->getBody(), $e->getCode());
 			}catch(RequestException $e) {
