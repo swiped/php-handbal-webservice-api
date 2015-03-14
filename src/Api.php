@@ -1,11 +1,11 @@
 <?php
 namespace KNKV\Webservice;
 
+use JsonMapper;
+use Illuminate\Cache\ArrayStore;
+use Illuminate\Contracts\Cache\Store;
 use GuzzleHttp\Exception\ParseException;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Cache\ArrayStore;
-use Illuminate\Cache\StoreInterface;
-use JsonMapper;
 use KNKV\Webservice\Exception\InvalidResponseException;
 use KNKV\Webservice\HttpClient\HttpClient;
 use KNKV\Webservice\HttpClient\HttpClientInterface;
@@ -13,7 +13,7 @@ use KNKV\Webservice\HttpClient\HttpClientInterface;
 class Api
 {
 
-	/** @var StoreInterface */
+	/** @var Store */
 	protected $cache;
 
 	/** @var HttpClientInterface $client  */
@@ -35,10 +35,10 @@ class Api
 
 	/**
 	 * @param string $code
-	 * @param StoreInterface $cache
+	 * @param Store $cache
 	 * @param HttpClientInterface $client
 	 */
-	public function __construct($code, StoreInterface $cache = null, HttpClientInterface $client = null)
+	public function __construct($code, Store $cache = null, HttpClientInterface $client = null)
 	{
 		$this->code = $code;
 		$this->cache = $cache ?: new ArrayStore();
