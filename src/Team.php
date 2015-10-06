@@ -81,6 +81,22 @@ class Team extends AbstractItem
     /**
      * @return string
      */
+    public function getIdGroup()
+    {
+        return $this->team_id_group;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIds()
+    {
+        return explode(',', $this->getIdGroup());
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->team_name;
@@ -93,7 +109,7 @@ class Team extends AbstractItem
      */
     public function getProgram($full = false)
     {
-        return $this->api->getProgram($full, $this->getId());
+        return $this->api->getProgram($full, $this->getIdGroup());
     }
 
     /**
@@ -104,7 +120,7 @@ class Team extends AbstractItem
      */
     public function getResults($full = false, $page = 0)
     {
-        return $this->api->getResults($full, $page, $this->getId());
+        return $this->api->getResults($full, $page, $this->getIdGroup());
     }
 
     /**
@@ -113,6 +129,6 @@ class Team extends AbstractItem
      */
     public function getStandings()
     {
-        return $this->api->getStandings($this->getId());
+        return $this->api->getStandings($this->getIdGroup());
     }
 }
