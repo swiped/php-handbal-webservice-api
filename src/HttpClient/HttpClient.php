@@ -42,7 +42,7 @@ class HttpClient implements HttpClientInterface
     public function post($params = [])
     {
         $response = $this->client->request('POST', 'http://www.knkv.nl/kcp/' . $this->getPath(), [
-            'body' => $params,
+            'form_params' => $params,
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
