@@ -1,14 +1,8 @@
 <?php
 namespace Swiped\HandbalWebservice\HttpClient;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\ClientInterface as GuzzleClientInterface;
-
 class HttpClient implements HttpClientInterface
 {
-    /** @var GuzzleClient $client */
-    protected $client;
-
     /** @var string $code */
     protected $code;
 
@@ -29,11 +23,9 @@ class HttpClient implements HttpClientInterface
      * @param string $code
      * @param GuzzleClientInterface $client
      */
-    public function __construct($code, GuzzleClientInterface $client = null)
+    public function __construct($code)
     {
         $this->code = $code;
-        $client = $client ?: new GuzzleClient($this->options);
-        $this->client = $client;
     }
 
     /**
@@ -41,11 +33,35 @@ class HttpClient implements HttpClientInterface
      */
     public function post($params = [])
     {
-        $response = $this->client->request('POST', 'https://www.handbal.nl/kcp/' . $this->getPath(), [
-            'form_params' => $params,
-        ]);
+    
+    	$url = 'https://www.handbal.nl/kcp/' . $this->getPath();
 
-        return json_decode($response->getBody()->getContents(), true);
+		//open connection
+		$ch = curl_init();
+		
+		//loop through post fields
+		$fields_string = '';
+		foreach($params as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+		rtrim($fields_string, '&');
+
+		//set the url, number of POST vars, POST data
+		curl_setopt($ch,CURLOPT_URL, $url);
+		curl_setopt($ch,CURLOPT_POST, count($params));
+		curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+		//set headers for processing the results
+		if($params['file'] === 'xml') {
+			header('Content-type: text/xml;charset=UTF-8');
+		}
+		if($params['file'] === 'json') {
+			header('Content-type: application/json');
+		}
+
+		//execute post and gather results
+		$result = curl_exec($ch);
+		echo $result;
+        return json_decode($result, true);
     }
 
     protected function getPath()

@@ -1,5 +1,5 @@
 <?php
-namespace KNKV\HandbalWebservice\Exception;
+namespace Swiped\HandbalWebservice\Exception;
 
 class InvalidResponseException extends \Exception
 {

@@ -4,8 +4,6 @@ namespace Swiped\HandbalWebservice;
 use JsonMapper;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Contracts\Cache\Store;
-use GuzzleHttp\Exception\ParseException;
-use GuzzleHttp\Exception\RequestException;
 use Swiped\HandbalWebservice\Exception\InvalidResponseException;
 use Swiped\HandbalWebservice\HttpClient\HttpClient;
 use Swiped\HandbalWebservice\HttpClient\HttpClientInterface;
@@ -73,10 +71,7 @@ class Api
         if ($data === null) {
             try {
                 $data = $this->client->post($parameters) ?: [];
-            } catch (ParseException $e) {
-                throw new InvalidResponseException("Cannot parse message: ".$e->getResponse()->getBody(), $e->getCode());
-            } catch (RequestException $e) {
-                throw new InvalidResponseException("Cannot finish request: " . $e->getMessage(). ', Request:' . $e->getRequest(), $e->getCode());
+                var_dump($data);
             } catch (\Exception $e) {
                 throw new InvalidResponseException($e->getMessage(), $e->getCode());
             }
@@ -132,7 +127,7 @@ class Api
      */
     public function map($json, $object)
     {
-        return $this->mapper->map($json, $object);
+        return $this->mapper->map((object)$json, $object);
     }
 
 
@@ -147,7 +142,7 @@ class Api
         }
 
         $response = $this->request('teams');
-
+				
         foreach ($response as $category => $data) {
             foreach ($data['v'] as $item) {
                 $item['category'] = $category;
