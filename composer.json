@@ -1,12 +1,16 @@
 {
-    "name": "fruitcakestudio/knkv-webservice-api",
-    "description": "KNKV Webservice API",
-    "keywords": ["knkv", "korfbal", "sportlink", "onsweb"],
+    "name": "swiped/handbal-webservice-api",
+    "description": "Handbal Webservice API",
+    "keywords": ["handbal", "sportlink", "onsweb"],
     "license": "MIT",
     "authors": [
         {
             "name": "Barry vd. Heuvel",
             "email": "barryvdh@gmail.com"
+        },
+        {
+            "name": "Chris Bovers",
+            "email": "chris@swiped.nl"
         }
     ],
     "require": {
@@ -17,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "KNKV\\Webservice\\": "src/"
+            "Swiped\\HandbalWebservice\\": "src/"
         }
     },
     "extra": {

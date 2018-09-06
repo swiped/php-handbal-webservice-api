@@ -1,4 +1,6 @@
 <?php
-namespace KNKV\Webservice\Exception;
+namespace KNKV\HandbalWebservice\Exception;
 
-class InvalidResponseException extends \Exception {}
+class InvalidResponseException extends \Exception
+{
+}

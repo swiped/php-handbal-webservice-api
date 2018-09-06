@@ -1,5 +1,5 @@
 <?php
-namespace KNKV\Webservice;
+namespace Swiped\HandbalWebservice;
 
 class Match extends AbstractItem
 {
@@ -106,7 +106,8 @@ class Match extends AbstractItem
 
     public $away_score;
 
-    public function getId() {
+    public function getId()
+    {
         return $this->game_id;
     }
 }

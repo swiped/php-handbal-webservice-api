@@ -1,5 +1,5 @@
 <?php
-namespace KNKV\Webservice\HttpClient;
+namespace Swiped\HandbalWebservice\HttpClient;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
@@ -41,7 +41,7 @@ class HttpClient implements HttpClientInterface
      */
     public function post($params = [])
     {
-        $response = $this->client->request('POST', 'http://www.knkv.nl/kcp/' . $this->getPath(), [
+        $response = $this->client->request('POST', 'https://www.handbal.nl/kcp/' . $this->getPath(), [
             'form_params' => $params,
         ]);
 

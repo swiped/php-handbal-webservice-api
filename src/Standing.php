@@ -1,16 +1,15 @@
 <?php
-namespace KNKV\Webservice;
+namespace Swiped\HandbalWebservice;
 
 class Standing extends AbstractItem
 {
-	/**
-	 * @var Poule
-	 */
+    /**
+     * @var Poule
+     */
     public $poule;
 
-	/**
-	 * @var Ranking[]
-	 */
-	public $lines;
-
+    /**
+     * @var Ranking[]
+     */
+    public $lines;
 }

@@ -1,5 +1,5 @@
 <?php
-namespace KNKV\Webservice;
+namespace Swiped\HandbalWebservice;
 
 class AbstractItem
 {

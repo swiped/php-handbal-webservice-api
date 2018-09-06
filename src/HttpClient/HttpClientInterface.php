@@ -1,5 +1,5 @@
 <?php
-namespace KNKV\Webservice\HttpClient;
+namespace Swiped\HandbalWebservice\HttpClient;
 
 interface HttpClientInterface
 {
@@ -9,5 +9,4 @@ interface HttpClientInterface
      * @return array
      */
     public function post($parameters = []);
-
 }

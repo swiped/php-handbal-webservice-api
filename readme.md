@@ -1,6 +1,8 @@
-## KNKV Webservice API Wrapper
+## Handbal Webservice API Wrapper
 
-Use Composer to install this package (`"fruitcakestudio/knkv-webservice-api": "0.1.x@dev",`) and require the autoloader.
+This project is forked from fruitcakestudio/knkv-webservice-api
+
+Use Composer to install this package (`"swiped/handbal-webservice-api"`) and require the autoloader.
 
 You can use the HttpClient to make requests to the API directly or use the API object to get more abstracted results.
 
@@ -8,7 +10,7 @@ All objects have public properties, matching the key/value from the API directly
 
 See the documentation on http://www.onswebbond.nl/userfiles/knkv/webservice.zip
 
-You need a subscription to the Onsweb Clubplugin for KNKV: http://www.onswebbond.nl/
+You need a subscription to the Onsweb Clubplugin for Handbal: http://www.onswebbond.nl/
 
 > Note: the API limits unique requests to 1 per hour. See Cache usage below.
 
@@ -19,7 +21,7 @@ Simple example:
 ```php
 require_once __DIR__ .'/../vendor/autoload.php';
 
-use KNKV\Webservice\Api;
+use Swiped\HandbalWebservice\Api;
 
 // Create a new API instance
 $api = new Api($code);
