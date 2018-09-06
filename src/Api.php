@@ -71,7 +71,6 @@ class Api
         if ($data === null) {
             try {
                 $data = $this->client->post($parameters) ?: [];
-                var_dump($data);
             } catch (\Exception $e) {
                 throw new InvalidResponseException($e->getMessage(), $e->getCode());
             }
@@ -142,7 +141,7 @@ class Api
         }
 
         $response = $this->request('teams');
-				
+                
         foreach ($response as $category => $data) {
             foreach ($data['v'] as $item) {
                 $item['category'] = $category;

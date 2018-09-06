@@ -33,34 +33,26 @@ class HttpClient implements HttpClientInterface
      */
     public function post($params = [])
     {
-    
-    	$url = 'https://www.handbal.nl/kcp/' . $this->getPath();
+        $url = 'https://www.handbal.nl/kcp/' . $this->getPath();
 
-		//open connection
-		$ch = curl_init();
-		
-		//loop through post fields
-		$fields_string = '';
-		foreach($params as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-		rtrim($fields_string, '&');
+        //open connection
+        $ch = curl_init();
+        
+        //loop through post fields
+        $fields_string = '';
+        foreach ($params as $key=>$value) {
+            $fields_string .= $key.'='.$value.'&';
+        }
+        rtrim($fields_string, '&');
 
-		//set the url, number of POST vars, POST data
-		curl_setopt($ch,CURLOPT_URL, $url);
-		curl_setopt($ch,CURLOPT_POST, count($params));
-		curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-		//set headers for processing the results
-		if($params['file'] === 'xml') {
-			header('Content-type: text/xml;charset=UTF-8');
-		}
-		if($params['file'] === 'json') {
-			header('Content-type: application/json');
-		}
-
-		//execute post and gather results
-		$result = curl_exec($ch);
-		echo $result;
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, count($params));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        //execute post and gather results
+        $result = curl_exec($ch);
         return json_decode($result, true);
     }
 
